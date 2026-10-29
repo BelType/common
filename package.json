@@ -1,0 +1,42 @@
+{
+  "name": "@beltype/common",
+  "version": "0.1.0",
+  "description": "The floor BelType's packages stand on: one typed error hierarchy, the grammar of the data-beltype attribute, and one MIME table.",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://codeberg.org/BelType/common.git"
+  },
+  "homepage": "https://codeberg.org/BelType/common",
+  "engines": {
+    "node": ">=22"
+  },
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    "./errors": {
+      "types": "./dist/errors.d.ts",
+      "import": "./dist/errors.js"
+    },
+    "./data-beltype": {
+      "types": "./dist/data-beltype.d.ts",
+      "import": "./dist/data-beltype.js"
+    },
+    "./mime": {
+      "types": "./dist/mime.d.ts",
+      "import": "./dist/mime.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "check": "tsc -p tsconfig.json",
+    "test": "node --test 'test/*.test.ts'",
+    "prepare": "tsc -p tsconfig.build.json"
+  },
+  "devDependencies": {
+    "@types/node": "^22",
+    "typescript": "7.0.2"
+  }
+}

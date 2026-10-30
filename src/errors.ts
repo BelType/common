@@ -49,3 +49,15 @@ export class BuildError extends BelTypeError {
     this.name = 'BuildError';
   }
 }
+
+/** A flag refused at its table: an unknown name, or a value outside the row. Carries the table's `owner` and the `flag`. */
+export class FlagError extends BelTypeError {
+  declare owner: string;
+  declare flag: string;
+  constructor(message: string, owner: string, flag: string) {
+    super(message);
+    this.name = 'FlagError';
+    this.owner = owner;
+    this.flag = flag;
+  }
+}

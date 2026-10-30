@@ -35,10 +35,10 @@ test('one MIME table, no charset parameter', () => {
   assert.equal(contentType('x.unknown-ext'), 'application/octet-stream');
 });
 
-test('the layering: src imports nothing but node:path, and that from mime alone', () => {
+test('the layering: src imports nothing outside the package but node:path, and that from mime alone', () => {
   const src = new URL('../src/', import.meta.url);
   for (const file of readdirSync(src).filter((f) => f.endsWith('.ts'))) {
-    const specs = [...readFileSync(new URL(file, src), 'utf8').matchAll(/^\s*import\s[^;]*?from\s*'([^']+)'/gm)].map((m) => m[1]);
+    const specs = [...readFileSync(new URL(file, src), 'utf8').matchAll(/^\s*import\s[^;]*?from\s*'([^']+)'/gm)].map((m) => m[1]).filter((spec) => !spec?.startsWith('./'));
     assert.deepEqual(specs, file === 'mime.ts' ? ['path'] : [], file);
   }
 });

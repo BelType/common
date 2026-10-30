@@ -1,6 +1,6 @@
 {
   "name": "@beltype/common",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "The floor BelType's packages stand on: one typed error hierarchy, the grammar of the data-beltype attribute, and one MIME table.",
   "type": "module",
   "license": "MIT",
@@ -23,6 +23,10 @@
     "./data-beltype": {
       "types": "./dist/data-beltype.d.ts",
       "import": "./dist/data-beltype.js"
+    },
+    "./flags": {
+      "types": "./dist/flags.d.ts",
+      "import": "./dist/flags.js"
     },
     "./mime": {
       "types": "./dist/mime.d.ts",

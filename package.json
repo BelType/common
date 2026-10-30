@@ -6,7 +6,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://codeberg.org/BelType/common.git"
+    "url": "git+https://github.com/BelType/common.git"
   },
   "homepage": "https://codeberg.org/BelType/common",
   "engines": {
@@ -38,5 +38,8 @@
   "devDependencies": {
     "@types/node": "^22",
     "typescript": "7.0.2"
+  },
+  "bugs": {
+    "url": "https://codeberg.org/BelType/common/issues"
   }
 }

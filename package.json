@@ -1,6 +1,6 @@
 {
   "name": "@beltype/common",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "The floor BelType's packages stand on: one typed error hierarchy, the grammar of the data-beltype attribute, and one MIME table.",
   "type": "module",
   "license": "MIT",

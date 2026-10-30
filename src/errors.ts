@@ -2,7 +2,7 @@
  * `errors.js` — one typed hierarchy under {@link BelTypeError}, distinguished by `name` (which appears in stack traces) and message. Throw a subclass, never a bare Error.
  *
  * @remarks
- * They deliberately carry no other state beyond an optional `code` (see CHANGELOG 2026-10-17).
+ * They deliberately carry no other state beyond an optional `code` (see CHANGELOG 2026-10-17), except {@link FlagError}: it carries `owner` and `flag` since 0.1.2 (2026-10-30), as Caster's `CasterError` carries `flag`, for a test or a caller to tell which flag was refused.
  *
  * A construction site throws `BelTypeError(message, code)` directly, `code` naming the kind in the closed union {@link BelTypeErrorCode} (see CHANGELOG 2026-09-03). If a future consumer needs structured context, add the field back together with its reader, in the same change — not before.
  *

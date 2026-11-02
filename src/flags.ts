@@ -61,8 +61,8 @@ export function defineFlags<T extends FlagTable>(owner: string, table: T): {
       const spec = row(name);
       if (spec.values === null) {
         const n = Number(raw);
-        if (raw.trim() === '') refuse(name, spec, raw);
-        check(name, n);
+        // The refusal quotes what was typed: `Number('abc')` is NaN, which JSON spells `null`.
+        if (raw.trim() === '' || !Number.isFinite(n) || n <= 0) refuse(name, spec, raw);
         return n;
       }
       const hit = spec.values.find((v) => String(v) === raw);

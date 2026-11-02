@@ -42,7 +42,7 @@ test('parse turns a command-line string into the row\'s value', () => {
 test('parse refuses a raw string that matches no row', () => {
   assert.throws(() => flags.parse('shaper', 'x'), { message: /takes "harfbuzz" or "fontkit"; got "x"/ });
   assert.throws(() => flags.parse('skipInk', '1'), FlagError);
-  assert.throws(() => flags.parse('dpi', 'abc'), FlagError);
+  assert.throws(() => flags.parse('dpi', 'abc'), { message: /takes a positive number; got "abc"/ });
   assert.throws(() => flags.parse('dpi', ''), FlagError);
   assert.throws(() => flags.parse('dpi', '0'), FlagError);
 });

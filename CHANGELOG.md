@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.2 — 2026-10-30
+## 0.1.2 — 2026-11-03
 
 - **`@beltype/common/flags`**: the shape every package declares its flags in, lifted from Caster's `options.ts`. `defineFlags(owner, table)` answers the defaults, a `resolve` that fills them and refuses an unknown name or a value outside the row, and a `parse` that turns a command-line string into a value. `FlagError`, in `errors`, carries the `owner` and the `flag`. Nothing existing changes.
 - **A number flag's refusal quotes what was typed.** `parse('rasterDpi', 'abc')` said `got null`, because `Number('abc')` is NaN and JSON spells it `null`; it now says `got "abc"`.

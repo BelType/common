@@ -4,7 +4,7 @@ Normative for every semantic question about this package. Amend by article, with
 
 ## Article 1. What common is
 
-Common is the floor BelType's packages stand on: what more than one of them needs and none of them owns. It holds three modules and nothing else. A module joins only when a second package needs it.
+Common is the floor BelType's packages stand on: what more than one of them needs and none of them owns. It holds four modules (`errors`, `data-beltype`, `flags`, `mime`) and nothing else. A module joins only when a second package needs it. The repository holds other packages beside it, each with its own `SPEC.md`; this one governs the floor alone.
 
 ## Article 2. Errors
 

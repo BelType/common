@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- **SPEC Article 1 amended**: the floor holds four modules (`errors`, `data-beltype`, `flags`, `mime`; it said three, stale since `flags`), and the repository holds other packages beside it, each with its own `SPEC.md`. The repository is now a pnpm workspace and this package lives in `packages/common`; a release is a tag `common-vX.Y.Z`. No code change.
+
 ## 0.1.2 — 2026-11-03
 
 - **`@beltype/common/flags`**: the shape every package declares its flags in, lifted from Caster's `options.ts`. `defineFlags(owner, table)` answers the defaults, a `resolve` that fills them and refuses an unknown name or a value outside the row, and a `parse` that turns a command-line string into a value. `FlagError`, in `errors`, carries the `owner` and the `flag`. Nothing existing changes.

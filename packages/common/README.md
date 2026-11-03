@@ -1,18 +1,15 @@
 # @beltype/common
 
-The floor BelType's packages stand on. Three modules, zero runtime dependencies:
+The floor BelType's packages stand on. Four modules, zero runtime dependencies:
 
 - `@beltype/common/errors`: one typed hierarchy under `BelTypeError` (`ConfigError`, `ValidationError`, `BuildError`). Throw a subclass, never a bare `Error`.
 - `@beltype/common/data-beltype`: the grammar of the `data-beltype` attribute, a space-separated list of words, each a flag (`split`) or a `key:value` (`pos:135`), and the two words the belt writes.
+- `@beltype/common/flags`: the shape every package declares its flags in, with defaults, a `resolve` and a command-line `parse`.
 - `@beltype/common/mime`: one MIME table, one answer on every path.
 
-Installed as a git dependency for now:
-
-```json
-"@beltype/common": "git+ssh://git@codeberg.org/BelType/common.git#v0.1.0"
+```bash
+npm install @beltype/common
 ```
-
-`prepare` builds `dist/`, so the install is a built package.
 
 ## Working on it
 

@@ -1,10 +1,10 @@
-# A tag vX.Y.Z publishes this package to npm by trusted publishing, with provenance and no token.
+# A tag <dir>-vX.Y.Z (common-v0.1.3) publishes packages/<dir> to npm by trusted publishing, with provenance and no token.
 # The house style: codeberg.org/BelType/decisions, project/a-release-moves-three-remotes-at-once.md.
 # ponytail: the tests are not run here; they run on the machine before the tag is pushed. Add a test step when a release ever goes out untested.
 name: release
 on:
   push:
-    tags: ['v*']
+    tags: ['*-v*']
 permissions:
   contents: read
   id-token: write
@@ -22,11 +22,15 @@ jobs:
           registry-url: https://registry.npmjs.org
       - name: The tag, package.json and the CHANGELOG name one version
         run: |
-          v="${GITHUB_REF_NAME#v}"
-          test "$(node -p 'require("./package.json").version')" = "$v" || { echo "::error::package.json does not say $v"; exit 1; }
-          grep -q "^## $v " CHANGELOG.md || { echo "::error::CHANGELOG.md has no heading for $v"; exit 1; }
+          dir="${GITHUB_REF_NAME%-v*}"; v="${GITHUB_REF_NAME##*-v}"
+          test -f "packages/$dir/package.json" || { echo "::error::the tag names packages/$dir, which has no package.json"; exit 1; }
+          test "$(node -p "Boolean(require('./packages/$dir/package.json').private)")" = false || { echo "::error::packages/$dir is private and is never published"; exit 1; }
+          test "$(node -p "require('./packages/$dir/package.json').version")" = "$v" || { echo "::error::packages/$dir/package.json does not say $v"; exit 1; }
+          grep -q "^## $v " "packages/$dir/CHANGELOG.md" || { echo "::error::packages/$dir/CHANGELOG.md has no heading for $v"; exit 1; }
+          echo "dir=$dir" >> "$GITHUB_ENV"
       - run: pnpm install --frozen-lockfile
       - name: Publish, unless this version is on npm already (a package's first version is published by hand)
         run: |
-          at="$(node -p 'require("./package.json").name')@${GITHUB_REF_NAME#v}"
+          cd "packages/$dir"
+          at="$(node -p 'require("./package.json").name')@${GITHUB_REF_NAME##*-v}"
           if npm view "$at" version >/dev/null 2>&1; then echo "$at is on npm already"; else npm publish --provenance --access public; fi

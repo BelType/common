@@ -1,4 +1,4 @@
-# A tag <dir>-vX.Y.Z (common-v0.1.3) publishes packages/<dir> to npm by trusted publishing, with provenance and no token.
+# A tag <dir>-vX.Y.Z (common-v0.1.3) publishes packages/<dir> to npm with the NPM_TOKEN secret of this repository (a granular token limited to these packages, 90 days), with provenance.
 # The house style: codeberg.org/BelType/decisions, project/a-release-moves-three-remotes-at-once.md.
 # ponytail: the tests are not run here; they run on the machine before the tag is pushed. Add a test step when a release ever goes out untested.
 name: release
@@ -30,6 +30,8 @@ jobs:
           echo "dir=$dir" >> "$GITHUB_ENV"
       - run: pnpm install --frozen-lockfile
       - name: Publish, unless this version is on npm already (a package's first version is published by hand)
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           cd "packages/$dir"
           at="$(node -p 'require("./package.json").name')@${GITHUB_REF_NAME##*-v}"
